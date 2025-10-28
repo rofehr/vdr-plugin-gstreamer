@@ -4,7 +4,7 @@ CXX = g++
 CXXFLAGS += -fPIC -O2 -Wall `pkg-config --cflags vdr`
 LDFLAGS += `pkg-config --libs vdr gstreamer-1.0 gstreamer-app-1.0`
 
-SRCS = gstdevice.cpp plugin.cpp
+SRCS = src/gstdevice.cpp src/plugin.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = libvdr-gstreamer.so
 
@@ -19,8 +19,8 @@ $(TARGET): $(OBJS)
 	$(CXX) -shared -Wl,-soname,$(TARGET) -o $@ $(OBJS) $(LDFLAGS)
 
 install: $(TARGET)
-	@- mkdir -p $(DESTDIR)$(LIBDIR)/vdr/plugins
-	@- install -m 0644 $(TARGET) $(DESTDIR)$(LIBDIR)/vdr/plugins/
+	mkdir -p $(DESTDIR)$(LIBDIR)/vdr/plugins
+	install -m 0644 $(TARGET) $(DESTDIR)$(LIBDIR)/vdr/plugins/
 
 clean:
-	@- rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET)
