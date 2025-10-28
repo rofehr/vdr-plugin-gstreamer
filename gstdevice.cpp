@@ -2,11 +2,9 @@
 "format", GST_FORMAT_TIME,
 nullptr);
 
-
 // Start the pipeline
 gst_element_set_state(pipeline_, GST_STATE_PLAYING);
 }
-
 
 void cGstDevice::ShutdownGst()
 {
