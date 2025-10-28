@@ -19,8 +19,8 @@ $(TARGET): $(OBJS)
 	$(CXX) -shared -Wl,-soname,$(TARGET) -o $@ $(OBJS) $(LDFLAGS)
 
 install: $(TARGET)
-	mkdir -p $(DESTDIR)$(LIBDIR)/vdr/plugins
-	install -m 0644 $(TARGET) $(DESTDIR)$(LIBDIR)/vdr/plugins/
+	@- mkdir -p $(DESTDIR)$(LIBDIR)/vdr/plugins
+	@- install -m 0644 $(TARGET) $(DESTDIR)$(LIBDIR)/vdr/plugins/
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	@- rm -f $(OBJS) $(TARGET)
