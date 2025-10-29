@@ -57,8 +57,10 @@ gst_element_set_state(pipeline_, GST_STATE_PLAYING);
 
 
 void cGstDevice::ShutdownGst() {
-if (pipeline_) {
-gst_element_set_state(pipeline_, GST_STATE_NULL);
-if (appsrc_) {
-gst_object_unref(appsrc_);
+	if (pipeline_) {
+		gst_element_set_state(pipeline_, GST_STATE_NULL);
+	}
+	if (appsrc_) {
+	gst_object_unref(appsrc_);
+	}
 }
