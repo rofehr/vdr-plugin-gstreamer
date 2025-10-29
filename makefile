@@ -14,7 +14,6 @@ TARGET = libvdr-gstreamer.so
 
 
 INCLUDES += $(shell pkg-config --cflags gstreamer-1.0 ) 
-INCLUDES += $(VDRDIR)
 
 
 .PHONY: all clean install
@@ -22,7 +21,7 @@ INCLUDES += $(VDRDIR)
 all: $(TARGET)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $< -o $@
+	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $(VDRDIR) $< -o $@
 
 $(TARGET): $(OBJS)
 	$(CXX) -shared -Wl,-soname,$(TARGET) -o $@ $(OBJS) $(LDFLAGS)
