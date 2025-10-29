@@ -16,9 +16,9 @@ virtual ~cGstDevice();
 
 
 // VDR device overrides
-virtual void PlayVideo(const uchar *Data, int Length);
-virtual void Flush() override;
-virtual void SetMode(tDisplayMode Mode);
+virtual int PlayVideo(const uchar *Data, int Length);
+virtual bool Flush() override;
+//virtual void SetMode(tDisplayMode Mode);
 virtual const char *DeviceName() const { return "GStreamer output"; }
 
 
