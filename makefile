@@ -12,12 +12,16 @@ SRCS = gstdevice.cpp plugin.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = libvdr-gstreamer.so
 
+
+INCLUDES += $(shell pkg-config --cflags gstreamer-1.0 ) 
+
+
 .PHONY: all clean install
 
 all: $(TARGET)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJS)
 	$(CXX) -shared -Wl,-soname,$(TARGET) -o $@ $(OBJS) $(LDFLAGS)
