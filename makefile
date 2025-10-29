@@ -2,7 +2,7 @@ PREFIX ?= /usr
 LIBDIR ?= $(PREFIX)/lib
 CXX = g++
 
-PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
+PKGCFG = $(if $(VDRDIR),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
 
 export CFLAGS   = $(call PKGCFG,cflags) -O0 
 export CXXFLAGS = $(call PKGCFG,cxxflags) -O0
