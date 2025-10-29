@@ -43,8 +43,10 @@ void cGstDevice::ShutdownGst() {
 
 int cGstDevice::PlayVideo(const uchar *Data, int Length) { PushVideo(Data, Length); }
 int cGstDevice::PlayAudio(const uchar *Data, int Length) { PushAudio(Data, Length); }
+
+
 void cGstDevice::PushVideo(const uchar *Data, int Length, GstClockTime pts) { 
-if (!appsrc_ || !pipeline_ || Length <= 0) return;
+if (!appsrc_video_ || !pipeline_ || Length <= 0) return;
 std::lock_guard<std::mutex> lk(push_mutex_);
 
 
