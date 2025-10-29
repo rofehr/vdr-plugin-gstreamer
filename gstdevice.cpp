@@ -46,4 +46,4 @@ void cGstDevice::PlayAudio(const uchar *Data, int Length) { PushAudio(Data, Leng
 void cGstDevice::PushVideo(const uchar *Data, int Length, GstClockTime pts) { /* simplified */ }
 void cGstDevice::PushAudio(const uchar *Data, int Length, GstClockTime pts) { /* simplified */ }
 void cGstDevice::Flush() {}
-void cGstDevice::SetMode(tDisplayMode Mode) {}
+void cGstDevice::SetMode(ePlayMode Mode) {}
