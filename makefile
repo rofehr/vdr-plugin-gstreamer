@@ -1,8 +1,12 @@
 PREFIX ?= /usr
 LIBDIR ?= $(PREFIX)/lib
 CXX = g++
-CXXFLAGS += -fPIC -O2 -Wall `pkg-config --cflags vdr`
-LDFLAGS += `pkg-config --libs vdr gstreamer-1.0 gstreamer-app-1.0`
+
+PKGCFG = $(if $(VDRDIR),$(shell pkg-config --variable=$(1) $(VDRDIR)/vdr.pc),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
+
+export CFLAGS   = $(call PKGCFG,cflags) -O0 
+export CXXFLAGS = $(call PKGCFG,cxxflags) -O0
+
 
 SRCS = gstdevice.cpp plugin.cpp
 OBJS = $(SRCS:.cpp=.o)
