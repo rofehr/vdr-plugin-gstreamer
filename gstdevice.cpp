@@ -41,9 +41,9 @@ void cGstDevice::ShutdownGst() {
   }
 }
 
-void cGstDevice::PlayVideo(const uchar *Data, int Length) { PushVideo(Data, Length); }
-void cGstDevice::PlayAudio(const uchar *Data, int Length) { PushAudio(Data, Length); }
+int cGstDevice::PlayVideo(const uchar *Data, int Length) { PushVideo(Data, Length); }
+int cGstDevice::PlayAudio(const uchar *Data, int Length) { PushAudio(Data, Length); }
 void cGstDevice::PushVideo(const uchar *Data, int Length, GstClockTime pts) { /* simplified */ }
 void cGstDevice::PushAudio(const uchar *Data, int Length, GstClockTime pts) { /* simplified */ }
-void cGstDevice::Flush() {}
+bool cGstDevice::Flush() {}
 void cGstDevice::SetMode(ePlayMode Mode) {}

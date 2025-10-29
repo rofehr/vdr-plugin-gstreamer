@@ -10,9 +10,9 @@ class cGstDevice : public cDevice {
 public:
   cGstDevice(const std::string &pipeline_desc = "");
   virtual ~cGstDevice();
-  virtual void PlayVideo(const uchar *Data, int Length);
-  virtual void PlayAudio(const uchar *Data, int Length);
-  virtual void Flush();
+  virtual int PlayVideo(const uchar *Data, int Length);
+  virtual int PlayAudio(const uchar *Data, int Length);
+  virtual bool Flush();
   virtual void SetMode(ePlayMode Mode);
   virtual cString DeviceName() const { return "GStreamer output"; }
   void PushVideo(const uchar *Data, int Length, GstClockTime pts = GST_CLOCK_TIME_NONE);
