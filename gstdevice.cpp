@@ -64,11 +64,11 @@ gst_buffer_unmap(buffer, &map);
 
 
 if (pts == GST_CLOCK_TIME_NONE) {
-guint64 frame = frame_count_++;
+guint64 frame = video_frame_count_++;
 gint64 est_ns = (gint64)((double)frame * (GST_SECOND / estimated_fps_));
 pts = est_ns;
 } else {
-frame_count_++;
+video_frame_count_++;
 }
 
 
