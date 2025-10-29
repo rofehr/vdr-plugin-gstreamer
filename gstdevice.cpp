@@ -77,7 +77,7 @@ GST_BUFFER_DURATION(buffer) = (gint64)(GST_SECOND / estimated_fps_);
 
 
 GstFlowReturn ret = GST_FLOW_ERROR;
-g_signal_emit_by_name(appsrc_, "push-buffer", buffer, &ret);
+g_signal_emit_by_name(appsrc_video, "push-buffer", buffer, &ret);
 if (ret != GST_FLOW_OK && ret != GST_FLOW_UNEXPECTED) {
 std::cerr << "appsrc push-buffer returned flow " << ret << std::endl;
 }
