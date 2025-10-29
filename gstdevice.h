@@ -29,8 +29,8 @@ private:
   std::string pipeline_desc_;
   std::atomic<guint64> video_frame_count_{0};
   std::atomic<guint64> audio_frame_count_{0};
-  std::atomic<gint64> last_video_pts_{GST_CLOCK_TIME_NONE};
-  std::atomic<gint64> last_audio_pts_{GST_CLOCK_TIME_NONE};
+  std::atomic<long unsigned int> last_video_pts_{GST_CLOCK_TIME_NONE};
+  std::atomic<long unsigned int> last_audio_pts_{GST_CLOCK_TIME_NONE};
   double estimated_fps_ = 25.0;
   uint32_t estimated_samplerate_ = 48000;
 };
