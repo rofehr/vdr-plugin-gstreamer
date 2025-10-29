@@ -1,4 +1,4 @@
-#include "plugin.h"
+#include "vdr/plugin.h"
 #include "gstdevice.h"
 
 class cPluginGStreamer : public cPlugin {
