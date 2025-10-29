@@ -1,34 +1,51 @@
-PREFIX ?= /usr
-LIBDIR ?= $(PREFIX)/lib
-CXX = g++
+# Makefile for vdr-plugin-gstreamer with AV (audio+video) support
+# ---------------------------------------------------------------
+# Supports GStreamer 1.x and pkg-config detection
 
-PKGCFG = $(if $(VDRDIR),$(shell PKG_CONFIG_PATH="$$PKG_CONFIG_PATH:../../.." pkg-config --variable=$(1) vdr))
+PLUGIN   = gstreamer
+PLUGINSDIR ?= $(DESTDIR)/usr/lib/vdr/plugins
 
-export CFLAGS   = $(call PKGCFG,cflags) -O0 
-export CXXFLAGS = $(call PKGCFG,cxxflags) -O0
+PKGCFG   = pkg-config
+GST_DEPS = gstreamer-1.0 gstreamer-app-1.0 gstreamer-audio-1.0 gstreamer-video-1.0
 
+CXXFLAGS ?= -O2 -Wall -Wextra -std=c++11 -fPIC
+CXXFLAGS += $(shell $(PKGCFG) --cflags $(GST_DEPS)) -D_FILE_OFFSET_BITS=64
+LDFLAGS  ?=
+LIBS      = $(shell $(PKGCFG) --libs $(GST_DEPS))
 
-SRCS = gstdevice.cpp plugin.cpp
+# Quellen
+SRCS = \
+  gstdevice.cpp \
+  plugin-gstreamer.cpp
+
 OBJS = $(SRCS:.cpp=.o)
-TARGET = libvdr-gstreamer.so
 
+all: libvdr-$(PLUGIN).so
 
-INCLUDES += $(shell pkg-config --cflags gstreamer-1.0 ) 
-INCLUDES += $(VDRDIR)
-
-.PHONY: all clean install
-
-all: $(TARGET)
+libvdr-$(PLUGIN).so: $(OBJS)
+	@echo "LD  $@"
+	$(CXX) $(CXXFLAGS) -shared -o $@ $(OBJS) $(LIBS)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $(INCLUDES)  $< -o $@
+	@echo "CXX $<"
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(TARGET): $(OBJS)
-	$(CXX) -shared -Wl,-soname,$(TARGET) -o $@ $(OBJS) $(LDFLAGS)
-
-install: $(TARGET)
-	@- mkdir -p $(DESTDIR)$(LIBDIR)/vdr/plugins
-	@- install -m 0644 $(TARGET) $(DESTDIR)$(LIBDIR)/vdr/plugins/
+install: libvdr-$(PLUGIN).so
+	@echo "Installing to $(PLUGINSDIR)"
+	mkdir -p $(PLUGINSDIR)
+	cp -a libvdr-$(PLUGIN).so $(PLUGINSDIR)/
 
 clean:
-	@- rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) libvdr-$(PLUGIN).so
+
+# Optional: pkg-config check
+check-deps:
+	@for dep in $(GST_DEPS); do \
+		if ! $(PKGCFG) --exists $$dep; then \
+			echo "Missing $$dep (please install GStreamer development packages)"; \
+			exit 1; \
+		fi; \
+	done
+	@echo "All GStreamer dependencies found."
+
+.PHONY: all install clean check-deps
