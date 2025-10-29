@@ -10,7 +10,7 @@ SRCS = gstdevice.cpp plugin-gstreamer.cpp
 OBJS = $(SRCS:.cpp=.o)
 all: libvdr-$(PLUGIN).so
 libvdr-$(PLUGIN).so: $(OBJS)
-	$(CXX) $(CXXFLAGS) -shared -o $@ $(OBJS) $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LIBS)
 install: libvdr-$(PLUGIN).so
 	mkdir -p $(PLUGINSDIR)
 	cp -a libvdr-$(PLUGIN).so $(PLUGINSDIR)/
