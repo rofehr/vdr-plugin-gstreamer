@@ -2,7 +2,7 @@ PLUGIN = gstreamer
 PLUGINSDIR ?= $(DESTDIR)/usr/lib/vdr/plugins
 PKGCFG = pkg-config
 GST_DEPS = gstreamer-1.0 gstreamer-app-1.0 gstreamer-audio-1.0 gstreamer-video-1.0
-CXXFLAGS ?= -O2 -Wall -Wextra -std=c++11 -fPIC
+CXXFLAGS += -O2 -Wall -Wextra -std=c++11 -fPIC
 CXXFLAGS += $(shell $(PKGCFG) --cflags $(GST_DEPS)) -D_FILE_OFFSET_BITS=64
 LDFLAGS ?=
 LIBS = $(shell $(PKGCFG) --libs $(GST_DEPS))
