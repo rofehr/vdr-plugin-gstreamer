@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vdr/plugin.h>
+#include <plugin.h>
 #include <gst/gst.h>
 #include <gst/app/gstappsrc.h>
 #include <mutex>
