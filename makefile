@@ -21,7 +21,7 @@ INCLUDES += $(shell pkg-config --cflags gstreamer-1.0 )
 all: $(TARGET)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $(INCLUDES) $(VDRDIR) $< -o $@
+	$(CXX) $(CXXFLAGS) -c $(INCLUDES) -c $(VDRDIR) $< -o $@
 
 $(TARGET): $(OBJS)
 	$(CXX) -shared -Wl,-soname,$(TARGET) -o $@ $(OBJS) $(LDFLAGS)
