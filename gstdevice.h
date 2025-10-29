@@ -16,10 +16,10 @@ virtual ~cGstDevice();
 
 
 // VDR device overrides
-virtual void PlayVideo(const uchar *Data, int Length) override;
+virtual void PlayVideo(const uchar *Data, int Length);
 virtual void Flush() override;
-virtual void SetMode(tDisplayMode Mode) override;
-virtual const char *DeviceName() const override { return "GStreamer output"; }
+virtual void SetMode(tDisplayMode Mode);
+virtual const char *DeviceName() const { return "GStreamer output"; }
 
 
 void PushVideo(const uchar *Data, int Length, GstClockTime pts = GST_CLOCK_TIME_NONE);
