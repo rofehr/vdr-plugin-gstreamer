@@ -14,6 +14,7 @@ TARGET = libvdr-gstreamer.so
 
 
 INCLUDES += $(shell pkg-config --cflags gstreamer-1.0 ) 
+INCLUDES += $(shell pkg-config --cflags vdr ) 
 
 
 .PHONY: all clean install
