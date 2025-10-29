@@ -6,7 +6,7 @@ CXXFLAGS ?= -O2 -Wall -Wextra -std=c++11 -fPIC
 CXXFLAGS += $(shell $(PKGCFG) --cflags $(GST_DEPS)) -D_FILE_OFFSET_BITS=64
 LDFLAGS ?=
 LIBS = $(shell $(PKGCFG) --libs $(GST_DEPS))
-SRCS = src/gstdevice.cpp src/plugin-gstreamer.cpp
+SRCS = gstdevice.cpp plugin-gstreamer.cpp
 OBJS = $(SRCS:.cpp=.o)
 all: libvdr-$(PLUGIN).so
 libvdr-$(PLUGIN).so: $(OBJS)
