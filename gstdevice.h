@@ -19,7 +19,7 @@ virtual ~cGstDevice();
 virtual int PlayVideo(const uchar *Data, int Length);
 virtual bool Flush();
 //virtual void SetMode(tDisplayMode Mode);
-virtual cString *DeviceName() const { return "GStreamer output"; }
+virtual cString DeviceName() const { return "GStreamer output"; }
 
 
 void PushVideo(const uchar *Data, int Length, GstClockTime pts = GST_CLOCK_TIME_NONE);
